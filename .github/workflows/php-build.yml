@@ -12,6 +12,9 @@ jobs:
           c:
           git clone --depth 1 https://github.com/php/php-sdk-binary-tools c:\php-sdk
           cd c:\php-sdk
+          echo %cd%
+          echo %~dp0
+          echo %~dpnx0
           dir
           phpsdk-vs17-x64.bat
           phpsdk_buildtree phpmaster
