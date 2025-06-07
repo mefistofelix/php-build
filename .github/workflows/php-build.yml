@@ -10,6 +10,7 @@ jobs:
       - shell: cmd
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+          SET PHP_SDK_VS=vs17
           c:
           git clone --depth 1 https://github.com/php/php-sdk-binary-tools c:\php-sdk
           cd c:\php-sdk
