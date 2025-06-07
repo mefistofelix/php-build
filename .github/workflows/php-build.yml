@@ -1,0 +1,21 @@
+name: 'php-build-win'
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  php-build-win:
+    runs-on: windows-2022
+    permissions: write-all
+    steps:
+      - run: |
+          c:
+          git clone --depth 1 https://github.com/php/php-sdk-binary-tools c:\php-sdk
+          cd c:\php-sdk
+          phpsdk-vs17-x64.bat
+          phpsdk_buildtree phpmaster
+          git clone --depth 1 https://github.com/php/php-src
+          cd php-src
+          phpsdk_deps --update --branch master
+          buildconf
+          configure --enable-cli
+          nmake
