@@ -31,3 +31,11 @@ jobs:
           call configure.bat --enable-cli
           echo "nmake"
           nmake
+          nmake snap
+          dir C:\php-sdk\php-src\Release
+          dir C:\php-sdk\php-src\Release_TS
+      - env:
+         GH_TOKEN: ${{ github.token }}
+        run: |
+         gh release create "php-release" C:\php-sdk\php-src\Release_TS
+            
