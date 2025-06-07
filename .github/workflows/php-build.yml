@@ -15,12 +15,19 @@ jobs:
           echo %cd%
           echo %~dp0
           echo %~dpnx0
-          dir
+          echo "init phpsdk"
           phpsdk-vs17-x64.bat
+          echo "buildtree"
           phpsdk_buildtree phpmaster
-          git clone --depth 1 https://github.com/php/php-src
+          echo "clone php-src"
+          git clone --depth 1 https://github.com/php/php-src php-src
           cd php-src
+          echo %cd%
+          echo "deps"
           phpsdk_deps --update --branch master
+          echo "buildconf"
           buildconf
+          echo "configure"
           configure --enable-cli
+          echo "nmake"
           nmake
