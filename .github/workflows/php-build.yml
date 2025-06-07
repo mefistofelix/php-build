@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 jobs:
   php-build-win:
-    runs-on: windows-2022
+    runs-on: windows-latest
     permissions: write-all
     steps:
       - shell: cmd
@@ -16,18 +16,18 @@ jobs:
           echo %~dp0
           echo %~dpnx0
           echo "init phpsdk"
-          call phpsdk-vs17-x64.bat
+          call c:\php-sdk\phpsdk-vs17-x64.bat
           echo "buildtree"
-          call phpsdk_buildtree.bat phpmaster
+          call c:\php-sdk\bin\phpsdk_buildtree.bat phpmaster
           echo "clone php-src"
           git clone --depth 1 https://github.com/php/php-src php-src
           cd php-src
           echo %cd%
           echo "deps"
-          call phpsdk_deps.bat --update --branch master
+          call c:\php-sdk\bin\phpsdk_deps.bat --update --branch master
           echo "buildconf"
-          buildconf
+          call buildconf.bat
           echo "configure"
-          configure --enable-cli
+          call configure.bat --enable-cli
           echo "nmake"
           nmake
