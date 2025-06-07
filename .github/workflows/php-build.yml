@@ -6,6 +6,7 @@ jobs:
   php-build-win:
     runs-on: windows-2025
     permissions: write-all
+    continue-on-error: true
     steps:
       - shell: cmd
         run: |
@@ -39,5 +40,5 @@ jobs:
       - env:
          GH_TOKEN: ${{ github.token }}
         run: |
-         gh release create "php-release" C:\php-sdk\php-src\Release_TS
+         gh release create "php-release" C:\php-sdk\php-src\Release_TS\php-debug-pack-8.5.0-dev-Win32-vs17-x64.zip
             
