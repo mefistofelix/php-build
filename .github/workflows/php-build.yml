@@ -16,15 +16,15 @@ jobs:
           echo %~dp0
           echo %~dpnx0
           echo "init phpsdk"
-          phpsdk-vs17-x64.bat
+          call phpsdk-vs17-x64.bat
           echo "buildtree"
-          phpsdk_buildtree phpmaster
+          call phpsdk_buildtree.bat phpmaster
           echo "clone php-src"
           git clone --depth 1 https://github.com/php/php-src php-src
           cd php-src
           echo %cd%
           echo "deps"
-          phpsdk_deps --update --branch master
+          call phpsdk_deps.bat --update --branch master
           echo "buildconf"
           buildconf
           echo "configure"
