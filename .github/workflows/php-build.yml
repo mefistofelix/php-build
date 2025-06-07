@@ -7,7 +7,8 @@ jobs:
     runs-on: windows-2022
     permissions: write-all
     steps:
-      - run: |
+      - shell: cmd
+        run: |
           c:
           git clone --depth 1 https://github.com/php/php-sdk-binary-tools c:\php-sdk
           cd c:\php-sdk
