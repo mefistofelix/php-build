@@ -6,14 +6,15 @@ jobs:
   php-build-win:
     runs-on: windows-2025
     permissions: write-all
-    continue-on-error: true
+    #continue-on-error: true
     steps:
       - shell: cmd
+        continue-on-error: true
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
           SET PHP_SDK_VS=vs17
           c:
-          git clone --depth 1 https://github.com/php/php-sdk-binary-tools c:\php-sdk
+          git clone --quiet --depth 1 https://github.com/php/php-sdk-binary-tools c:\php-sdk
           cd c:\php-sdk
           echo %cd%
           echo %~dp0
@@ -31,15 +32,17 @@ jobs:
           echo "buildconf"
           call buildconf.bat
           echo "configure"
-          call configure.bat --enable-cli
+          call configure.bat --disable-all --enable-cli
           echo "nmake"
           nmake
           nmake snap
           dir C:\php-sdk\php-src\Release
           dir C:\php-sdk\php-src\Release_TS
+          dir C:\php-sdk\php-src
+          dir C:\php-sdk
       - env:
          GH_TOKEN: ${{ github.token }}
         run: |
          set DT=%date:~10,4%-%date:~4,2%-%date:~7,2%_%time:~0,2%-%time:~3,2%-%TIME:~6,2%
-         gh release create %DT% C:\php-sdk\php-src\Release_TS\php-8.5.0-dev-Win32-vs17-x64.zip C:\php-sdk\php-src\Release_TS\pecl-8.5.0-dev-Win32-vs17-x64.zip
+         gh release create %DT% C:\php-sdk\php-devel-pack-8.5.0-dev-Win32-vs17-x64.zip C:\php-sdk\php-src\Release_TS\php-8.5.0-dev-Win32-vs17-x64.zip C:\php-sdk\php-src\Release_TS\pecl-8.5.0-dev-Win32-vs17-x64.zip
             
