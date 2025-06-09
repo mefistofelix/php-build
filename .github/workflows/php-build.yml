@@ -40,5 +40,6 @@ jobs:
       - env:
          GH_TOKEN: ${{ github.token }}
         run: |
-         gh release create "php-release" C:\php-sdk\php-src\Release_TS\php-debug-pack-8.5.0-dev-Win32-vs17-x64.zip
+         set DT=%date:~10,4%-%date:~4,2%-%date:~7,2%_%time:~0,2%-%time:~3,2%-%TIME:~6,2%
+         gh release create %DT% C:\php-sdk\php-src\Release_TS\php-8.5.0-dev-Win32-vs17-x64.zip C:\php-sdk\php-src\Release_TS\pecl-8.5.0-dev-Win32-vs17-x64.zip
             
