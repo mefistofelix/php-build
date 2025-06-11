@@ -1,0 +1,21 @@
+name: 'ssh-inverse'
+on:
+  workflow_dispatch:
+    inputs:
+      remote-ssh:
+        description: 'Remote SSH'
+        required: true
+        default: 'user@12.10.7.234'
+jobs:
+  ssh-inverse:
+    runs-on: windows-2025
+    steps:
+      - shell: pwsh
+        run: |
+          Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
+          Get-Service -Name ssh-agent | Set-Service -StartupType Manual
+          Get-Service ssh-agent
+          Start-Service ssh-agent
+          Get-Service ssh-agent
+          gunzip
+          Start-Sleep -Duration (New-TimeSpan -Hours 3)
