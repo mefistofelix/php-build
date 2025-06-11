@@ -16,7 +16,7 @@ jobs:
           Get-Service -Name ssh-agent | Set-Service -StartupType Manual
           Start-Service ssh-agent
           dir "C:\Program Files\Git\bin"
-          Get-ChildItem -Recurse -ErrorAction SilentlyContinue -Path "C:\" -Include "7z*" | foreach {
+          Get-ChildItem -Recurse -ErrorAction SilentlyContinue -Path "C:\msys64" -Include "7z*" | foreach {
             $_.FullName
             break
           }
