@@ -1,6 +1,6 @@
 name: 'php-build-win'
 on:
-  push:
+  #push:
   workflow_dispatch:
 jobs:
   php-build-win:
