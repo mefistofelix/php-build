@@ -16,9 +16,9 @@ jobs:
           Get-Service -Name ssh-agent | Set-Service -StartupType Manual
           Start-Service ssh-agent
           dir "C:\Program Files\Git\bin"
-          Get-ChildItem -Recurse -ErrorAction SilentlyContinue -Path "C:\msys64" -Include "7z*" | foreach {
+          Get-ChildItem -Recurse -ErrorAction SilentlyContinue -Path "C:\msys64" -Include "pacman*" | foreach {
             $_.FullName
-            break
+            #break
           }
           #| Select -First 1
           wget https://github.com/jpillora/chisel/releases/download/v1.10.1/chisel_1.10.1_windows_amd64.gz
