@@ -16,6 +16,12 @@ jobs:
           #Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
           #Get-Service -Name ssh-agent | Set-Service -StartupType Manual
           #Start-Service ssh-agent
+          $ssdc = @"
+          AllowGroups Administrators
+          AuthenticationMethods password
+          "@
+          $ssdc | Out-File $env:programdata\ssh\ssh_config -Encoding ascii
+          Restart-Service sshd
           #dir "C:\Program Files\Git\bin"
           #Get-ChildItem -Recurse -ErrorAction SilentlyContinue -Path "C:\msys64" -Include "pacman*" | foreach {
           #  $_.FullName
