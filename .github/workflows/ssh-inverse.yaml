@@ -15,13 +15,16 @@ jobs:
           #Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
           Get-Service -Name ssh-agent | Set-Service -StartupType Manual
           Start-Service ssh-agent
-          dir "C:\Program Files\Git\bin"
-          Get-ChildItem -Recurse -ErrorAction SilentlyContinue -Path "C:\msys64" -Include "pacman*" | foreach {
-            $_.FullName
-            #break
-          }
+          #dir "C:\Program Files\Git\bin"
+          #Get-ChildItem -Recurse -ErrorAction SilentlyContinue -Path "C:\msys64" -Include "pacman*" | foreach {
+          #  $_.FullName
+          #  #break
+          #}
           #| Select -First 1
+          $env:path += ";C:\msys64\usr\bin"
+          pacman -S mingw-w64-clang-x86_64-7zip
+          pacman -S mingw-w64-clang-x86_64-wget2
           wget https://github.com/jpillora/chisel/releases/download/v1.10.1/chisel_1.10.1_windows_amd64.gz
-          gunzip chisel_1.10.1_windows_amd64.gz
+          7z x chisel_1.10.1_windows_amd64.gz
           chisel client ${{ inputs.remote-ssh }} R:22:localhost:22
           Start-Sleep -Duration (New-TimeSpan -Hours 3)
