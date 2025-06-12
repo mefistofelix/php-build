@@ -13,6 +13,7 @@ jobs:
       - shell: pwsh
         run: |
           #Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
+          #Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
           Get-Service -Name ssh-agent | Set-Service -StartupType Manual
           Start-Service ssh-agent
           #dir "C:\Program Files\Git\bin"
