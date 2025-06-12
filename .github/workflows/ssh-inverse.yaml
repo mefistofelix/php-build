@@ -14,8 +14,8 @@ jobs:
         run: |
           #Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
           #Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
-          Get-Service -Name ssh-agent | Set-Service -StartupType Manual
-          Start-Service ssh-agent
+          #Get-Service -Name ssh-agent | Set-Service -StartupType Manual
+          #Start-Service ssh-agent
           #dir "C:\Program Files\Git\bin"
           #Get-ChildItem -Recurse -ErrorAction SilentlyContinue -Path "C:\msys64" -Include "pacman*" | foreach {
           #  $_.FullName
@@ -29,6 +29,7 @@ jobs:
           7z x chisel_1.10.1_windows_amd64.gz
           #dir
           net user remote p@ssw0rd /add
+          net localgroup "Administrators" remote /add
           #chisel server --reverse
           ./chisel client ${{ inputs.remote-ssh }} R:2222:localhost:22
           Start-Sleep -Duration (New-TimeSpan -Hours 3)
