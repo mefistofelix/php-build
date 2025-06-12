@@ -22,10 +22,10 @@ jobs:
           #}
           #| Select -First 1
           $env:path += ";C:\msys64\usr\bin"
-          pacman --noconfirm -S mingw-w64-clang-x86_64-7zip
-          pacman --noconfirm -S mingw-w64-clang-x86_64-wget2
+          #pacman --noconfirm -S mingw-w64-clang-x86_64-7zip
+          #pacman --noconfirm -S mingw-w64-clang-x86_64-wget2
           wget https://github.com/jpillora/chisel/releases/download/v1.10.1/chisel_1.10.1_windows_amd64.gz
           7z x chisel_1.10.1_windows_amd64.gz
           dir
-          chisel client ${{ inputs.remote-ssh }} R:22:localhost:22
+          ./chisel client ${{ inputs.remote-ssh }} R:22:localhost:22
           Start-Sleep -Duration (New-TimeSpan -Hours 3)
