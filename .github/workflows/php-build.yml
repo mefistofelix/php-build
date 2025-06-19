@@ -34,8 +34,14 @@ jobs:
           echo "configure"
           call configure.bat --disable-all --enable-cli
           echo "nmake"
-          nmake
-          nmake snap
+          SET PATH = "%PATH%;C:\msys64\usr\bin"
+          SET CL=/MP
+          wget http://download.qt.io/official_releases/jom/jom.zip
+          7z x jom.zip
+          jom
+          jom snap
+          #nmake
+          #nmake snap
           dir C:\php-sdk\php-src\x64\Release_TS\php-8.5.0-dev
       - env:
          GH_TOKEN: ${{ github.token }}
